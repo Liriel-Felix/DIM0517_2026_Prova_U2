@@ -26,6 +26,7 @@ jobs:
 
       - name: Check
         run: node --check src/index.js
-
+      
+      # Teste
       - name: Test
         run: npm test
