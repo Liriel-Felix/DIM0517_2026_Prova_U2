@@ -31,6 +31,7 @@ jobs:
       - name: Check
         run: node --check src/index.js
 
+      # Teste  
       - name: Create tag
         working-directory: .
         run: |
