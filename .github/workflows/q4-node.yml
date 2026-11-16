@@ -1,11 +1,16 @@
 name: Node
 
+on:
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: node
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,3 +25,23 @@ jobs:
 
       - name: Check
         run: node --check src/index.js
+
+      - name: Test
+        run: npm test
+
+      - name: Build Docker image
+        run: docker build -t api-node .
+
+      - name: Run Docker container
+        run: docker run -d --name api-node -p 8080:8080 api-node
+
+      - name: Verify application
+        run: |
+          for i in {1..10}; do
+            if curl --fail http://localhost:8080/healthy; then
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs api-node
+          exit 1
