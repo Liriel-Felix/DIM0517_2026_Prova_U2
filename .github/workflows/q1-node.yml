@@ -1,5 +1,13 @@
 name: Node
 
+on:
+  push:
+    branches:
+      - 'feature/**'
+    paths:
+      - 'node/src/**'
+      - 'node/Dockerfile'
+      - 'node/package.json'
 
 jobs:
   build:
