@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Docker container
         run: docker run -d --name api-node -p 8080:8080 api-node
-
+      # Teste
       - name: Verify application
         run: |
           for i in {1..10}; do
